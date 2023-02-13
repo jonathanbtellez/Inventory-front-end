@@ -1,0 +1,55 @@
+.navbar-container{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  justify-content: space-between;
+  color: #ccc;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.is-mobile .navbar-toolbar{
+  position: fixed;
+  z-index: 2;
+}
+
+h1.app-name{
+  padding: 0.3rem;
+  margin: 0;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+ul li{
+  list-style: none;
+}
+
+.sidenav-container{
+  flex: 1;
+}
+
+.is-mobile .sidenav-container{
+  flex: 1 0 auto;
+}
+
+.profile-card{
+  text-align: center;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.header{
+  margin-top: 1rem;
+}
+
+.aligned-with-icon{
+  position: absolute;
+  margin-top: 3px;
+  margin-left: 1rem; /* optional */
+}
+
+
