@@ -79,6 +79,18 @@ export class CategoryComponent {
     });
   }
 
+  search(value: string){
+    if(value.length === 0){
+      return this.getCategories();
+    }
+
+    this.categoryServices.findCategoryById(value).subscribe({
+      next: ((data: any) =>{
+        this.processCategoriesResponse(data);
+      })
+    })
+  }
+
   openCategoryDialog(){
     const dialogRef = this.dialog.open( NewCategoryComponent,{
       width: '50%'
@@ -105,5 +117,4 @@ export interface CategoryElement {
   id: Number,
   name: string,
   description: string,
-
 }

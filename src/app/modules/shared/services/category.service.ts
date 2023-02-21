@@ -49,4 +49,9 @@ export class CategoryService {
     const endPoint = `${this.baseUri}/categories/${id}`;
     return this.http.delete(endPoint);
   }
+
+  findCategoryById(id: any){
+    const endPoint = `${this.baseUri}/categories/${id}`;
+    return this.http.get(endPoint);
+  }
 }
