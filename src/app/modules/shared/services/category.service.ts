@@ -32,11 +32,21 @@ export class CategoryService {
   /**
    * Update category
    * @param body //Information to save
-   * @param id //Identifier of our category
+   * @param id //Identifier of the category
    * @returns //put request
    */
   updateCategory(body: any, id: any){
     const endPoint = `${this.baseUri}/categories/${id}`;
     return this.http.put(endPoint, body);
+  }
+
+  /**
+   * Delete category
+   * @param id //Identifier of the category
+   * @returns //Delete Request
+   */
+  deleteCategory(id: any){
+    const endPoint = `${this.baseUri}/categories/${id}`;
+    return this.http.delete(endPoint);
   }
 }
