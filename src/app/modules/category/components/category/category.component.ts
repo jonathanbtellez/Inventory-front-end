@@ -46,6 +46,22 @@ export class CategoryComponent {
     }
   }
 
+  edit(id: number, name: string, description: string){
+    const dialogRef = this.dialog.open( NewCategoryComponent,{
+      width: "50%",
+      data: {id: id, name: name, description: description}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 1){
+        this.openSnackBar("Category edited","Success");
+        this.getCategories();
+      }else if(result == 2){
+        this.openSnackBar("Something went wrong to edit category","Error");
+      }
+    });
+  }
+
   openCategoryDialog(){
     const dialogRef = this.dialog.open( NewCategoryComponent,{
       width: '50%'
