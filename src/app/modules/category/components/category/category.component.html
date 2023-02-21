@@ -4,7 +4,7 @@
     <div>
       <mat-form-field hintLabel="Search categories" appearance="fill">
         <mat-label>Search categories</mat-label>
-        <input matInput #input />
+        <input matInput #input/>
       </mat-form-field>
     </div>
   </mat-card-header>
@@ -12,7 +12,7 @@
     <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
       <ul fxLayout="row" fxLayoutGap="1rem">
         <li>
-          <button mat-raised-button color="primary">Add category</button>
+          <button mat-raised-button color="primary" (click)="openCategoryDialog()">Add category</button>
         </li>
       </ul>
     </div>
