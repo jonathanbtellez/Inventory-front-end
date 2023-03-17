@@ -13,3 +13,6 @@
   justify-content: center;
 }
 
+.mat-mdc-form-field-required-marker{
+  display: none;
+}

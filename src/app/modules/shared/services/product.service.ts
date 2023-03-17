@@ -14,4 +14,10 @@ export class ProductService {
     const endpoint = `${this.baseUri}/products`;
     return this.http.get(endpoint);
   }
+
+  saveProduct(body:any){
+    const endpoint = `${this.baseUri}/products`;
+    return this.http.post(endpoint,body);
+  }
+
 }
