@@ -122,6 +122,24 @@ export class ProductComponent {
       }
     });
   }
+
+  search(name: any){
+    console.log(name);
+
+    if(name.length === 0){
+      return this.getProducts();
+    }else{
+      this.productService.getProductByName(name)
+        .subscribe({
+          next:((data: any)=>{
+            this.processProductResponse(data);
+          }),
+          error: ((error: any)=>{
+            console.log(error);
+          })
+        })
+    }
+  }
 }
 
 export interface ProductElement {
