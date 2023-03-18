@@ -5,6 +5,7 @@ import { ProductService } from '../../shared/services/product.service';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { NewProductComponent } from '../new-product/new-product.component';
+import { ConfirmComponent } from '../../shared/components/confirm/confirm.component';
 
 @Component({
   selector: 'app-product',
@@ -104,6 +105,22 @@ export class ProductComponent {
         }
       });
 
+  }
+
+  delete(id: any){
+    const dialogRef = this.dialog.open( ConfirmComponent,{
+      width: '30%',
+      data:{id, module: "product"}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 1){
+        this.openSnackBar("Product deleted","Success");
+        this.getProducts();
+      }else if(result == 2){
+        this.openSnackBar("Something went wrong to delete product","Error");
+      }
+    });
   }
 }
 

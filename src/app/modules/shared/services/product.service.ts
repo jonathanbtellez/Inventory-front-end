@@ -40,4 +40,14 @@ export class ProductService {
     return this.http.put(endpoint,body);
   }
 
+  /**
+   * Delete product
+   * @param id
+   * @returns
+   */
+  deleteProduct(id: number){
+    const endpoint = `${this.baseUri}/products/${id}`;
+    return this.http.delete(endpoint);
+  }
+
 }

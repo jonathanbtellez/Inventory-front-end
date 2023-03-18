@@ -71,7 +71,7 @@ export class CategoryComponent {
   delete(id: any){
     const dialogRef = this.dialog.open( ConfirmComponent,{
       width: "30%",
-      data: {id: id}
+      data:{id, module: "category"}
     });
 
     dialogRef.afterClosed().subscribe(result => {
