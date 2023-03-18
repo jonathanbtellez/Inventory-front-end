@@ -4,7 +4,7 @@ import { CategoryService } from '../../shared/services/category.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductService } from '../../shared/services/product.service';
 
-export interface Category{
+export interface Category {
   id: Number,
   name: string,
   description: string,
@@ -20,7 +20,7 @@ export class NewProductComponent {
   public productForm: FormGroup;
   public formState: string = "";
   categories: Category[] = [];
-  selectedFile:any;
+  selectedFile: any;
   nameImg: string = "";
 
 
@@ -41,15 +41,15 @@ export class NewProductComponent {
 
     if (this.data != null) {
       this.formState = "Update"
-      // this.updateForm(data);
+      this.updateForm(data);
     }
   }
 
-  ngOnInit():void{
+  ngOnInit(): void {
     this.getCategories();
   }
 
-  onSave(){
+  onSave() {
     let data = {
       name: this.productForm.get('name')?.value,
       price: this.productForm.get('price')?.value,
@@ -59,39 +59,58 @@ export class NewProductComponent {
     }
 
     const uploadImageData = new FormData();
-    uploadImageData.append('picture', data.picture,data.picture.name);
+    uploadImageData.append('picture', data.picture, data.picture.name);
     uploadImageData.append('name', data.name);
-    uploadImageData.append('price',data.price);
-    uploadImageData.append('quantity',data.quantity);
-    uploadImageData.append('categoryId',data.category);
+    uploadImageData.append('price', data.price);
+    uploadImageData.append('quantity', data.quantity);
+    uploadImageData.append('categoryId', data.category);
 
-    // Calling the service to save the product
-    this.productService.saveProduct(uploadImageData)
-      .subscribe({
-        next:((data:any) => this.dialog.close(1)),
-        error:((error:any) => this.dialog.close(2))
-      })
+    if (this.data != null) {
+      // Update product
+      this.productService.updateProduct(this.data.id, uploadImageData)
+        .subscribe({
+          next: ((data: any) => this.dialog.close(1)),
+          error: ((error: any) => this.dialog.close(2))
+        })
+    } else {
+      // Calling the service to save the product
+      this.productService.saveProduct(uploadImageData)
+        .subscribe({
+          next: ((data: any) => this.dialog.close(1)),
+          error: ((error: any) => this.dialog.close(2))
+        })
+    }
   }
 
-  onCancel(){
+  onCancel() {
     this.dialog.close(3);
   }
 
-  getCategories(){
+  getCategories() {
     this.categoryService.getCategories()
       .subscribe({
-        next:((data: any)=>{
+        next: ((data: any) => {
           console.log(data);
           this.categories = data.categoryResponse.category;
         }),
-        error:((error:any)=>{
+        error: ((error: any) => {
           console.log("Error to get categories", error);
         })
       });
   }
 
-  onFileChanged(event:any){
+  onFileChanged(event: any) {
     this.selectedFile = event.target.files[0];
     this.nameImg = this.selectedFile.name;
+  }
+
+  updateForm(data: any) {
+    this.productForm = this.fb.group({
+      name: [data.name, Validators.required],
+      price: [data.price, Validators.required],
+      quantity: [data.quantity, Validators.required],
+      category: [data.category.id, Validators.required],
+      picture: ['', Validators.required],
+    });
   }
 }

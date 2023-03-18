@@ -10,14 +10,34 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Get all products
+   * @returns
+   */
   getProduct(){
     const endpoint = `${this.baseUri}/products`;
     return this.http.get(endpoint);
   }
 
+  /**
+   * Save product
+   * @param body
+   * @returns
+   */
   saveProduct(body:any){
     const endpoint = `${this.baseUri}/products`;
     return this.http.post(endpoint,body);
+  }
+
+  /**
+   * Update product
+   * @param id
+   * @param body
+   * @returns
+   */
+  updateProduct(id: number, body:any){
+    const endpoint = `${this.baseUri}/products/${id}`;
+    return this.http.put(endpoint,body);
   }
 
 }

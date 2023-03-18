@@ -46,7 +46,7 @@ export class ProductComponent {
     if(resp.metadata[0].code == "00"){
       let listProduct = resp.product.products;
       listProduct.forEach( ( element:ProductElement )=> {
-        element.category = element.category.name;
+        // element.category = element.category.name;
         element.picture = 'data:image/jpeg;base64,'+element.picture;
         dateProduct.push(element);
       });
@@ -76,6 +76,34 @@ export class ProductComponent {
     return this. snackBar.open(message,action, {
       duration: 3000
     })
+  }
+
+  edit(
+    id : number,
+    name : string,
+    price : number,
+    quantity : number,
+    category : string ){
+      const dialogRef = this.dialog.open( NewProductComponent,{
+        width: '50%',
+        data:{
+          id,
+          name,
+          price,
+          quantity,
+          category
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if(result == 1){
+          this.openSnackBar("Product edit","Success");
+          this.getProducts();
+        }else if(result == 2){
+          this.openSnackBar("Something went wrong to edit product","Error");
+        }
+      });
+
   }
 }
 
